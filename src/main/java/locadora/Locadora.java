@@ -167,10 +167,12 @@ public class Locadora {
         }
         return valorBruto;
     }
-
-    // Calcula a diaria de um aluguel a partir da categoria do veiculo (0, 1 ou 2),
-    // multiplicada pela quantidade de dias.
-    // TODO: adicionar Javadoc.
+    /**
+     * Calcula o valor da Diarias a partir da tabela de preços e multiplica pela vezes em dias
+     * @param categoria indica qual a categoria dentro da tabela_precos
+     * @param dias quantidade de dias trbalhados
+     * @return
+     */
     public double calcularDiariaComCategoria(int categoria, int dias) {
         double valorDiaria = TABELA_PRECOS[categoria];
         return valorDiaria * dias;
