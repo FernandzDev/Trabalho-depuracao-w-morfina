@@ -223,7 +223,7 @@ public class Locadora {
 
     public double calcularDescontoEscalonado(double valorBase, int dias) {
         double desconto = 0;
-        for (int i = 0; i <= LIMIARES_DIAS.length; i++) {
+        for (int i = 0; i < LIMIARES_DIAS.length; i++) {
             if (dias >= LIMIARES_DIAS[i]) {
                 desconto = DESCONTOS[i];
             }
