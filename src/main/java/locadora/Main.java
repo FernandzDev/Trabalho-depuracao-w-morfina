@@ -13,6 +13,22 @@ public class Main {
         };
         carros[1].setDisponivel(false);
 
+        Van[] vans = {
+            new Van("VAN1234", "Fiorino", 130.0,  650),
+            new Van("VAN5678", "Master", 200.0,  1500),
+            new Van("VAN9012", "Ducato", 180.0,  1200),
+            new Van("VAN3456", "Partner Rapid", 140.0,  650)
+        };
+        vans[1].setDisponivel(false);
+
+        Moto[] moto = {
+            new Moto("MOT1234", "CG 160", 70.0, 162),
+            new Moto("MOT5678", "CB 500F", 110.0, 471),
+            new Moto("MOT9012", "MT-03", 95.0, 321),
+            new Moto("MOT3456", "Factor 150", 65.0, 149)
+        };
+        moto[1].setDisponivel(false);
+
         Cliente[] clientes = {
             new Cliente("Joana", 25, 5),
             new Cliente("Pedro", 19, 0),
