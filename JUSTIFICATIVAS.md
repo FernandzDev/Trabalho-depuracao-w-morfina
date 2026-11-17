@@ -8,7 +8,7 @@ Se for fazer em dupla, cada aluno coloca aqui nesse arquivo quais respondeu.
 
 ## 1. contarCarrosDisponiveis
 
-**Tinha bug?**
+**Tinha bug?Não
 
 **Explicação:**
 
