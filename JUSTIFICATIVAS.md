@@ -71,3 +71,9 @@ Se for fazer em dupla, cada aluno coloca aqui nesse arquivo quais respondeu.
 **Tinha bug?**
 
 **Explicação:**
+
+
+# Justificativas - Parte 2
+
+Veiculo: Criei a classe mãe veiculo, assim consigo fazer as outras classes herdarem os parametros dela
+e otimizar parte do sistema.
