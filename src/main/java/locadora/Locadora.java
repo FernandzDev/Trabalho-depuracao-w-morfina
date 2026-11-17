@@ -212,9 +212,15 @@ public class Locadora {
         return disponiveis + " carro(s) disponivel(is), media de R$" + media + "/dia";
     }
 
-    // Aplica um desconto escalonado sobre o valor base, conforme a quantidade
-    // de dias alugados: 5% (3+ dias), 10% (7+ dias) ou 20% (15+ dias).
-    // TODO: adicionar Javadoc.
+    /**
+     * Aplica um desconto escalonado sobre o valor base, conforme a quantidade
+     * de dias alugados: 5% (3+ dias), 10% (7+ dias) ou 20% (15+ dias).
+     *
+     * @param valorBase valor antes do desconto
+     * @param dias quantidade de dias alugados
+     * @return valor final ja com o desconto aplicado
+     */
+
     public double calcularDescontoEscalonado(double valorBase, int dias) {
         double desconto = 0;
         for (int i = 0; i <= LIMIARES_DIAS.length; i++) {
