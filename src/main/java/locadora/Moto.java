@@ -1,6 +1,6 @@
 package locadora;
 
-public class Moto {
+public class Moto implements Alugavel {
 
     private String placa;
     private String modelo;
@@ -37,8 +37,21 @@ public class Moto {
         return valorDiaria;
     }
 
+    @Override
+    public double calcularValorDiaria() {
+        if (cilindrada > 300) {
+            return valorDiaria + 30.0;
+        }
+        return valorDiaria;
+    }
+
     public boolean isDisponivel() {
         return disponivel;
+    }
+
+    @Override
+    public String getDescricao() {
+        return "Moto "+ modelo + " ("+ cilindrada +" cc)";
     }
 
     public int getCilindrada() {
@@ -53,5 +66,4 @@ public class Moto {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
-
 }

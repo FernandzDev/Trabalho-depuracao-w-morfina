@@ -216,4 +216,13 @@ public class Locadora {
     public boolean clienteElegivelDescontoFidelidade(Cliente cliente, int totalLocacoesAnteriores) {
         return cliente.getIdade() > 25 && totalLocacoesAnteriores >= 3;
     }
+
+    public double somarDiarias(Alugavel[] itens){
+        double total = 0;
+
+        for (Alugavel item : itens) {
+            total += item.calcularValorDiaria();
+        }
+        return total;
+    }
 }
