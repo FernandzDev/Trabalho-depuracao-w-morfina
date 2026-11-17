@@ -231,18 +231,19 @@ public class Locadora {
         return valorBase * (1 - desconto);
     }
 
-    // Verifica se o cliente tem direito ao desconto de fidelidade: precisa ter
-    // pelo menos 25 anos E pelo menos 3 locacoes anteriores.
-    // TODO: adicionar Javadoc.
+    /**
+     * Verifica se o cliente tem direito ao desconto de fidelidade: precisa ter
+     * pelo menos 25 anos E pelo menos 3 locacoes anteriores.
+     *
+     * @param cliente
+     * @param totalLocacoesAnteriores
+     * @return true se o cliente for elegivel e false caso contrario
+     */
+
     public boolean clienteElegivelDescontoFidelidade(Cliente cliente, int totalLocacoesAnteriores) {
-        return cliente.getIdade() > 25 && totalLocacoesAnteriores >= 3;
+        return cliente.getIdade() >= 25 && totalLocacoesAnteriores >= 3;
     }
 
-    /**
-     * Soma as diárias de todos os itens, inclusive os indisponíveis.
-     * @param itens vetor não nulo e sem elementos nulos
-     * @return total, ou zero se o vetor estiver vazio
-     */
     public double somarDiarias(Alugavel[] itens){
         double total = 0;
 
