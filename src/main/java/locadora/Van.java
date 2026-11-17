@@ -1,69 +1,37 @@
 package locadora;
 
-public class Van implements Alugavel {
-    private String placa;
-    private String modelo;
-    private double valorDiaria;
-    private boolean disponivel;
-    private int capacidadeCarga;
+public class Van extends Veiculo {
+
+    private final int capacidadeCarga;
 
     /**
-     * Cria uma nova van, que já começa disponível para locação.
-     *
-     * @param placa
-     * @param modelo
-     * @param valorDiaria
-     * @param disponivel
-     * @param capacidadeCarga
+     * Cria uma van nova, que já começa como disponivel e indica que a "capacidadeCarga" pertence a esse objeto.
+     * @param placa (placa da van)
+     * @param modelo (modelo da van)
+     * @param valorDiaria (valor da diaria da van)
+     * @param capacidadeCarga (indica qual a capacidade de carga da van)
      */
-    public Van(String placa, String modelo, double valorDiaria, boolean disponivel, int capacidadeCarga) {
-        this.placa = placa;
-        this.modelo = modelo;
-        this.valorDiaria = valorDiaria;
-        this.disponivel = disponivel;
+    public Van(String placa, String modelo, double valorDiaria, int capacidadeCarga) {
+        super(placa, modelo, valorDiaria);
         this.capacidadeCarga = capacidadeCarga;
     }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public double getValorDiaria() {
-        return valorDiaria;
-    }
-
-
-    @Override
-    public double calcularValorDiaria() {
-        if (capacidadeCarga > 1000){
-            return valorDiaria + 50.0;
-        }
-        return valorDiaria;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    @Override
-    public String getDescricao() {
-        return "Van "+ modelo + " ( Capacidade: "+ capacidadeCarga +" kg)";
-    }
-
-    public int getCapacidadeCarga() {
+    public int getCapacidadeCarga () {
         return capacidadeCarga;
     }
 
-    /**
-     * Altera a disponibilidade da Van.
-     *
-     * @param disponivel
-     */
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+        @Override
+        public double calcularValorDiaria () {
+        double valorBase = getValorDiariaBase();
+        if (capacidadeCarga > 1000) {
+            return valorBase + 50.0;
+        }
+        return valorBase;
     }
+
+    @Override
+    public String getDescricao () {
+        return "Van " + getModelo() + " ( Capacidade: " + capacidadeCarga + " kg)";
+    }
+
+
 }

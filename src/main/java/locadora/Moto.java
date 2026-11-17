@@ -1,69 +1,43 @@
 package locadora;
 
-public class Moto implements Alugavel {
+/**
+ * Cada moto é uma extensão de veiculo, possui um modelo, valor de diaria e indicador de disponibilidade.
+ * Além disso possui a variavel "cilindrada" para indicar qual é a cilindrada da moto
+ */
+public class Moto extends Veiculo {
 
-    private String placa;
-    private String modelo;
-    private double valorDiaria;
-    private boolean disponivel;
-    private int cilindrada;
+    private final int cilindrada;
 
     /**
-     * Cria uma nova moto, que já começa disponível para locação.
-     *
-     * @param placa
-     * @param modelo
-     * @param valorDiaria
-     * @param disponivel
-     * @param cilindrada
+     * Cria uma moto nova, que já começa como disponível e indica que a "cilindrada" pertence a esse objeto.
+     * @param placa (placa da moto)
+     * @param modelo (modelo da moto)
+     * @param valorDiaria (valor da diaria da moto)
+     * @param cilindrada (indica qual é a cilindrada da moto)
      */
-    public Moto(String placa, String modelo, double valorDiaria, boolean disponivel, int cilindrada) {
-        this.placa = placa;
-        this.modelo = modelo;
-        this.valorDiaria = valorDiaria;
-        this.disponivel = disponivel;
-        this.cilindrada = cilindrada;
-    }
+  public Moto (String placa, String modelo, double valorDiaria, int cilindrada ){
+      super(placa, modelo, valorDiaria);
+      this.cilindrada = cilindrada;
+  }
 
-    public String getPlaca() {
-        return placa;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public double getValorDiaria() {
-        return valorDiaria;
-    }
+  public int getCilindrada(){
+      return cilindrada;
+  }
 
     @Override
     public double calcularValorDiaria() {
-        if (cilindrada > 300) {
-            return valorDiaria + 30.0;
-        }
-        return valorDiaria;
-    }
+      double valorBase = getValorDiariaBase();
 
-    public boolean isDisponivel() {
-        return disponivel;
+      if (cilindrada > 300){
+          return valorBase + 30.0;
+      }
+
+      return valorBase;
     }
 
     @Override
     public String getDescricao() {
-        return "Moto "+ modelo + " ("+ cilindrada +" cc)";
+        return "Moto " + getModelo() + " (" + cilindrada + " cc)";
     }
 
-    public int getCilindrada() {
-        return cilindrada;
-    }
-
-    /**
-     * Altera a disponibilidade da moto
-     *
-     * @param disponivel
-     */
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
 }
