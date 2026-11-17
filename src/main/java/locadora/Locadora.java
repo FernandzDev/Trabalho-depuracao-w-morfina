@@ -171,19 +171,34 @@ public class Locadora {
         return valorBruto;
     }
     /**
-     * Calcula o valor da Diarias a partir da tabela de preços e multiplica pela vezes em dias
-     * @param categoria indica qual a categoria dentro da tabela_precos
-     * @param dias quantidade de dias trbalhados
-     * @return
+     * Calcula o valor de um aluguel a partir da categoria do veículo,
+     * multiplicando a diária da categoria pela quantidade de dias.
+     * @param categoria indica qual a categoria do veiculo: 0(R$ 90,00), 1 (R$ 130,00) ou 2 (R$ 180,00)
+     * @param dias quantidade de dias
+     * @return valor do aluguel em reais
+     * @throws IllegalArgumentException se a categoria não existir na tabela ou se dias for negativo
      */
     public double calcularDiariaComCategoria(int categoria, int dias) {
+        if (categoria < 0 || categoria >= TABELA_PRECOS.length) {
+            throw new IllegalArgumentException(
+                    "Categoria invalida: " + categoria + " (use um valor de 0 a " + (TABELA_PRECOS.length - 1) + ")");
+        }
+        if (dias < 0) {
+            throw new IllegalArgumentException("A quantidade de dias nao pode ser negativa");
+        }
         double valorDiaria = TABELA_PRECOS[categoria];
         return valorDiaria * dias;
     }
 
-    // Gera um resumo com a quantidade de carros disponiveis e o valor medio
-    // da diaria apenas dos carros disponiveis.
-    // TODO: adicionar Javadoc.
+
+    /**
+     * Mostra a quantidade de carros disponiveis e calcula a média do valor diario
+     * apenas de carros disponiveis
+     *
+     * @param carros frota a ser resumida
+     * @return texto no formato "N carro(s) disponivel(is), media de R$X/dia,
+     * a média é 0 quando não há carros disponíveis
+     */
     public String gerarResumoFrota(Carro[] carros) {
         int disponiveis = 0;
         double somaValores = 0;
