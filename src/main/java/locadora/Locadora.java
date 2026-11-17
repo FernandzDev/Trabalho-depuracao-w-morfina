@@ -126,7 +126,7 @@ public class Locadora {
      * @return valor final a pagar em reais
      */
     public double processarLocacaoCompleta(Carro carro, Cliente cliente, Seguro seguro, int dias) {
-        validarLocacao(carro);
+        validarLocacao(carro, dias);
         double valorBruto = calcularValorBruto(carro, seguro, dias);
         return aplicarDescontosEEncargos(valorBruto, cliente, dias);
     }
@@ -135,10 +135,14 @@ public class Locadora {
      * Valida se a locação pode acontecer
      *
      * @param carro a ser alugado
+     * @param dias quantidade de dias que vai alugar o carro
      */
-    private void validarLocacao(Carro carro) {
+    private void validarLocacao(Carro carro, int dias) {
         if (!carro.isDisponivel()) {
             throw new IllegalStateException("Carro indisponivel");
+        }
+        if (dias < 0) {
+            throw new IllegalStateException("A quantidade de dias precisa ser superior a 0");
         }
     }
 
@@ -160,8 +164,8 @@ public class Locadora {
      * condições falhar, o valor não muda.
      *
      * @param valorBruto valor antes do desconto
-     * @param cliente    cliente da locadora
-     * @param dias       quantidade de dias
+     * @param cliente cliente da locadora
+     * @param dias quantidade de dias
      * @return valor final, seja com ou sem o desconto
      */
     private double aplicarDescontosEEncargos(double valorBruto, Cliente cliente, int dias) {
@@ -176,7 +180,7 @@ public class Locadora {
      * multiplicando a diária da categoria pela quantidade de dias.
      *
      * @param categoria indica qual a categoria do veiculo: 0(R$ 90,00), 1 (R$ 130,00) ou 2 (R$ 180,00)
-     * @param dias      quantidade de dias
+     * @param dias quantidade de dias
      * @return valor do aluguel em reais
      * @throws IllegalArgumentException se a categoria não existir na tabela ou se dias for negativo
      */
@@ -219,7 +223,7 @@ public class Locadora {
      * de dias alugados: 5% (3+ dias), 10% (7+ dias) ou 20% (15+ dias).
      *
      * @param valorBase valor antes do desconto
-     * @param dias      quantidade de dias alugados
+     * @param dias quantidade de dias alugados
      * @return valor final ja com o desconto aplicado
      */
 
