@@ -155,11 +155,14 @@ public class Locadora {
     }
 
     /**
+     * Aplica um desconto no valor bruto quando o cliente é apto
+     * ou o aluguel tem 7 dias ou mais. Se qualqer uma das duas
+     * condições falhar, o valor não muda.
      *
-     * @param valorBruto
-     * @param cliente
-     * @param dias
-     * @return
+     * @param valorBruto valor antes do desconto
+     * @param cliente cliente da locadora
+     * @param dias quantidade de dias
+     * @return valor final, seja com ou sem o desconto
      */
     private double aplicarDescontosEEncargos(double valorBruto, Cliente cliente, int dias) {
         if (cliente.isApto() || dias >= 7) {
