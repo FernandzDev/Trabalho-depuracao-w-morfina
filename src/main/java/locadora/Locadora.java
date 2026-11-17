@@ -3,7 +3,6 @@ package locadora;
 /**
  * Classe de serviço da locadora: reúne as operações de consulta, cálculo de
  * valores, descontos e multas sobre a frota, os clientes e os seguros.
- *
  * A classe não guarda estado próprio, apenas constantes de tabelas de
  * preço e de desconto. Todos os dados chegam por parâmetro.
  */
