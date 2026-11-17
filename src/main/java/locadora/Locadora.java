@@ -46,7 +46,7 @@ public class Locadora {
 
     /**
      * Calcula a media de idade dos clientes informados.
-     *Se a lista for null ou vazia, devolve 0 em vez de
+     * Se a lista for null ou vazia, devolve 0 em vez de
      * tentar dividir por zero.
      *
      * @param clientes cuja a idade ser considerada
@@ -85,7 +85,7 @@ public class Locadora {
      * da diária. Se houver mais de um carro com a mesma placa, vale o primeiro
      *
      * @param carros frota onde a busca será feita (não deve ser null)
-     * @param placa placa procurada
+     * @param placa  placa procurada
      * @return texto no formato "Modelo - R$valor/dia", ou uma mensagem
      * informando que o carro não foi encontrado
      */
@@ -119,10 +119,10 @@ public class Locadora {
      * desconto quando o cliente estiver apto e o aluguel for de 7 dias
      * ou mais.
      *
-     * @param carro carro que sera alugado
+     * @param carro   carro que sera alugado
      * @param cliente cliente que esta alugando
-     * @param seguro seguro contratado
-     * @param dias quantidade de dias de aluguel
+     * @param seguro  seguro contratado
+     * @param dias    quantidade de dias de aluguel
      * @return valor final a pagar em reais
      */
     public double processarLocacaoCompleta(Carro carro, Cliente cliente, Seguro seguro, int dias) {
@@ -133,6 +133,7 @@ public class Locadora {
 
     /**
      * Valida se a locação pode acontecer
+     *
      * @param carro a ser alugado
      */
     private void validarLocacao(Carro carro) {
@@ -144,9 +145,9 @@ public class Locadora {
     /**
      * Calcula o valor bruto da locação sem desconto.
      *
-     * @param carro carro alugado
+     * @param carro  carro alugado
      * @param seguro seguro contratado
-     * @param dias quantidade de dias
+     * @param dias   quantidade de dias
      * @return (diária do carro + diária do seguro) * dias
      */
     private double calcularValorBruto(Carro carro, Seguro seguro, int dias) {
@@ -159,8 +160,8 @@ public class Locadora {
      * condições falhar, o valor não muda.
      *
      * @param valorBruto valor antes do desconto
-     * @param cliente cliente da locadora
-     * @param dias quantidade de dias
+     * @param cliente    cliente da locadora
+     * @param dias       quantidade de dias
      * @return valor final, seja com ou sem o desconto
      */
     private double aplicarDescontosEEncargos(double valorBruto, Cliente cliente, int dias) {
@@ -169,11 +170,13 @@ public class Locadora {
         }
         return valorBruto;
     }
+
     /**
      * Calcula o valor de um aluguel a partir da categoria do veículo,
      * multiplicando a diária da categoria pela quantidade de dias.
+     *
      * @param categoria indica qual a categoria do veiculo: 0(R$ 90,00), 1 (R$ 130,00) ou 2 (R$ 180,00)
-     * @param dias quantidade de dias
+     * @param dias      quantidade de dias
      * @return valor do aluguel em reais
      * @throws IllegalArgumentException se a categoria não existir na tabela ou se dias for negativo
      */
@@ -216,7 +219,7 @@ public class Locadora {
      * de dias alugados: 5% (3+ dias), 10% (7+ dias) ou 20% (15+ dias).
      *
      * @param valorBase valor antes do desconto
-     * @param dias quantidade de dias alugados
+     * @param dias      quantidade de dias alugados
      * @return valor final ja com o desconto aplicado
      */
 
@@ -243,11 +246,16 @@ public class Locadora {
         return cliente.getIdade() >= 25 && totalLocacoesAnteriores >= 3;
     }
 
-    public double somarDiarias(Alugavel[] itens){
+    /**
+     * Soma as diárias de todos os itens, inclusive os indisponíveis
+     * @param itens vetor não nulo e sem elementos nulos
+     * @return total em reais, ou zero se o vetor estiver vazio
+     */
+    public double somarDiarias(Alugavel[] itens) {
         double total = 0;
 
-        for (Alugavel item : itens) {
-            total += item.calcularValorDiaria();
+        for (int i = 0; i < itens.length; i++) {
+            total += itens[i].calcularValorDiaria();
         }
         return total;
     }
