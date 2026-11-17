@@ -127,7 +127,7 @@ public class Locadora {
      * @return valor final a pagar em reais
      */
     public double processarLocacaoCompleta(Carro carro, Cliente cliente, Seguro seguro, int dias) {
-        validarLocacao(carro, dias);
+        validarLocacao(carro);
         double valorBruto = calcularValorBruto(carro, seguro, dias);
         return aplicarDescontosEEncargos(valorBruto, cliente, dias);
     }
