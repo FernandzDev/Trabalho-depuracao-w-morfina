@@ -51,7 +51,7 @@ no primeiro carro encontrado em vez de continuar varrendo e sobrescrever o resul
 
 **Tinha bug?** Sim, bug lógico
 
-**Explicação:**O laço usava `i <= diasAtraso`, executando `diasAtraso + 1` vezes: 3 dias de atraso cobravam
+**Explicação:** O laço usava `i <= diasAtraso`, executando `diasAtraso + 1` vezes: 3 dias de atraso cobravam
 RS160,00 em vez de RS120,00, e 0 dias de atraso cobravam R$40,00 em vez de zero. Troquei por `diasAtraso * multaPorDia`
 e, para `diasAtraso <= 0`, devolvo 0 (sem multa e sem valor negativo).
 
@@ -69,7 +69,7 @@ não calcular valores negativos ou zerados; as demais etapas (`calcularValorBrut
 
 **Tinha bug?** Sim, bug de execução
 
-**Explicação:**  O método usava `categoria` direto como índice de `TABELA_PRECOS`, que só tem as posições 0, 1 e 2. Qualquer outro
+**Explicação:** O método usava `categoria` direto como índice de `TABELA_PRECOS`, que só tem as posições 0, 1 e 2. Qualquer outro
 valor (3, 5, -1…) lançava `ArrayIndexOutOfBoundsException`, uma exceção interna que não explica o problema ao usuário.
 Passei a validar a categoria antes de acessar o array e a lançar `IllegalArgumentException` com uma mensagem clara
 ("Categoria invalida: X (use um valor de 0 a 2)"). Também rejeto `dias` negativo. Para categorias válidas (como a
