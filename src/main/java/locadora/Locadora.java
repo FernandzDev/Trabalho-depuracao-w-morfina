@@ -245,7 +245,11 @@ public class Locadora {
     public boolean clienteElegivelDescontoFidelidade(Cliente cliente, int totalLocacoesAnteriores) {
         return cliente.getIdade() >= 25 && totalLocacoesAnteriores >= 3;
     }
-
+    /**
+     * Soma as diárias de todos os itens, inclusive os indisponíveis
+     * @param itens vetor não nulo e sem elementos nulos
+     * @return total em reais, ou zero se o vetor estiver vazio
+     */
     public double somarDiarias(Alugavel[] itens){
         double total = 0;
 
