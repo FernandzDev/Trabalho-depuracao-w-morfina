@@ -44,6 +44,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
 
+        // Aréa de teste //
+        //
+        //
+
+        //
+        //
+        // Fechamento area para testes //
+
+
         while (opcao != 0) {
             exibirMenu();
             opcao = scanner.nextInt();
