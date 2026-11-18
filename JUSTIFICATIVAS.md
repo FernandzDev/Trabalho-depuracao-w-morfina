@@ -59,7 +59,7 @@ e, para `diasAtraso <= 0`, devolvo 0 (sem multa e sem valor negativo).
 
 **Tinha bug?** Sim, bug lógico 
 
-**Explicação:**A regra diz que o desconto de 15% só vale quando o cliente é apto E o aluguel é de 7 dias ou mais,
+**Explicação:** A regra diz que o desconto de 15% só vale quando o cliente é apto E o aluguel é de 7 dias ou mais,
 mas o método `aplicarDescontosEEncargos` usava `||`. Assim, qualquer cliente apto ganhava desconto mesmo em
 1 dia, e qualquer cliente (até não apto) ganhava desconto com 7 dias ou mais. Troquei `||` por `&&`. Também
 acrescentei, em `validarLocacao`, uma verificação de `dias <= 0` (lançando `IllegalArgumentException`), para
