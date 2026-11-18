@@ -18,7 +18,8 @@ elementos, e incrementa o contador somente quando `isDisponivel()` é `true`.
 **Tinha bug?** sim, tinha um bug lógico, não travava mas devolvia um valor errado.
 
 **Explicação:** O laço começava em `i = 1`, então o primeiro carro do array nunca entrava na soma.
-Com os carros de diária 100, 220, 90 e 250 o método devolvia 560 em vez de 660. 
+Com os carros de diária 100, 220, 90 e 250 o método devolvia 560 em vez de 660. poderiamos trocar getValorDiariaBase()
+por calcularValorDiaria() dentro do laço, mas somarDiarias() já faz exatamente isso.
 
 ## 3. calcularMediaIdadeClientes
 
@@ -38,7 +39,7 @@ de 20,5). Mudei o retorno para `double` e faço a divisão com
 `maisVelho == null` é verdadeira e ele vira o candidato, e depois só é substituído quando aparece alguém com idade
 estritamente maior (`>`), o que também faz o primeiro vencer em caso de empate.
 
-## 5. buscarCarroPorPlaca
+## 5. buscarVeiculoPorPlaca
 
 **Tinha bug?** Sim, bug de execução
 

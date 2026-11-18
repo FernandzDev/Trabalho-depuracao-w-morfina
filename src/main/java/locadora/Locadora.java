@@ -16,7 +16,7 @@ public class Locadora {
      * Vetor utilizado para fazer a contagem de carros disponiveis.
      *
      * @param veiculos frota a ser analisada
-     * @return quantidade de carros disponiveis para alugar
+     * @return quantidade de veiculos disponiveis para alugar
      */
     public int contarVeiculosDisponiveis(Veiculo[] veiculos) {
         int total = 0;
@@ -29,8 +29,7 @@ public class Locadora {
     }
 
     /**
-     * Soma o valor da diária de todos os veiculos da frota, estejam eles
-     * disponíveis ou não.
+     * Soma as diárias finais, com os adicionais, inclusive dos indisponíveis.
      *
      * @param veiculos frota a ser somada (não deve ser null nem conter elementos null)
      * @return soma das diárias, em reais. 0 se a frota estiver vazia
@@ -60,7 +59,7 @@ public class Locadora {
 
     /**
      * Busca, entre os clientes informados, o de maior idade. Em caso de
-     * empate, devolve o que aparece primeiro no array.
+     * empate, devolve o que aparece primeiro no array e retorna null quando o vetor está vazio
      *
      * @param clientes a serem comparados (não deve ser null)
      * @return o cliente mais velho
@@ -77,12 +76,12 @@ public class Locadora {
 
     /**
      * Busca um veiculo pela placa e devolve uma descrição com o modelo e o valor
-     * da diária. Se houver mais de um veiculo com a mesma placa, vale o primeiro
+     * da diária final. Se houver mais de um veiculo com a mesma placa, vale o primeiro
      *
      * @param veiculos frota onde a busca será feita (não deve ser null)
      * @param placa placa procurada
      * @return texto no formato "Modelo - R$valor/dia", ou uma mensagem
-     * informando que o carro não foi encontrado
+     * informando que o veiculo não foi encontrado
      */
     public String buscarVeiculoPorPlaca(Veiculo[] veiculos, String placa) {
         for (int i = 0; i < veiculos.length; i++) {
@@ -112,9 +111,9 @@ public class Locadora {
      * Processa uma locação completa validando o carro e a quantidade de dias,
      * calcula o valor bruto ((diária + seguro) * dias) e aplica 15% de
      * desconto quando o cliente estiver apto e o aluguel for de 7 dias
-     * ou mais.
+     * ou mais.Em caso de item indisponível ou quantidade de dias menor que 1 aparece a mensagem IllegalStateException
      *
-     * @param veiculo carro que sera alugado
+     * @param veiculo veiculo que sera alugado
      * @param cliente cliente que esta alugando
      * @param seguro seguro contratado
      * @param dias quantidade de dias de aluguel
@@ -154,7 +153,7 @@ public class Locadora {
 
     /**
      * Aplica um desconto no valor bruto quando o cliente é apto
-     * ou o aluguel tem 7 dias ou mais. Se qualqer uma das duas
+     * e o aluguel tem 7 dias ou mais. Se qualqer uma das duas
      * condições falhar, o valor não muda.
      *
      * @param valorBruto valor antes do desconto
@@ -190,8 +189,8 @@ public class Locadora {
 
 
     /**
-     * Mostra a quantidade de carros disponiveis e calcula a média do valor diario
-     * apenas de carros disponiveis
+     * Mostra a quantidade de veiculos disponiveis e a média usa a diária
+     * final apenas dos disponíveis, fica em zero se não houver nenhum.
      *
      * @param veiculos frota a ser resumida
      * @return texto no formato "N carro(s) disponivel(is), media de R$X/dia,
@@ -233,8 +232,8 @@ public class Locadora {
      * Verifica se o cliente tem direito ao desconto de fidelidade: precisa ter
      * pelo menos 25 anos E pelo menos 3 locacoes anteriores.
      *
-     * @param cliente
-     * @param totalLocacoesAnteriores
+     * @param cliente cliente da locadora
+     * @param totalLocacoesAnteriores quantidade de locações anteriores
      * @return true se o cliente for elegivel e false caso contrario
      */
 
