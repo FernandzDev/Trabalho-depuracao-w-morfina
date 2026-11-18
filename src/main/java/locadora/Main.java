@@ -50,7 +50,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Carros disponiveis: " + locadora.contarCarrosDisponiveis(carros));
+                    System.out.println("Veiculos disponiveis: " + locadora.contarVeiculosDisponiveis(carros));
                     break;
                 case 2:
                     System.out.println("Receita total da frota: R$" + locadora.calcularReceitaTotalFrota(carros));
@@ -65,7 +65,7 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Buscando carro de placa ZZZ0000...");
-                    System.out.println(locadora.buscarCarroPorPlaca(carros, "ZZZ0000"));
+                    System.out.println(locadora.buscarVeiculoPorPlaca(carros, "ZZZ0000"));
                     break;
                 case 6:
                     System.out.println("Multa para 3 dias de atraso: R$" + locadora.calcularMultaAtraso(3));
