@@ -21,13 +21,13 @@ public class Main {
         };
         vans[1].setDisponivel(false);
 
-        Moto[] moto = {
+        Moto[] motos = {
             new Moto("MOT1234", "CG 160", 70.0, 162),
             new Moto("MOT5678", "CB 500F", 110.0, 471),
             new Moto("MOT9012", "MT-03", 95.0, 321),
             new Moto("MOT3456", "Factor 150", 65.0, 149)
         };
-        moto[1].setDisponivel(false);
+        motos[1].setDisponivel(false);
 
         Cliente[] clientes = {
             new Cliente("Joana", 25, 5),
@@ -52,6 +52,11 @@ public class Main {
         //
         // Fechamento area para testes //
 
+        Veiculo[] frota = new Veiculo[carros.length + motos.length + vans.length];
+
+        System.arraycopy(carros, 0, frota, 0, carros.length);
+        System.arraycopy(motos, 0, frota, carros.length, motos.length);
+        System.arraycopy(vans, 0, frota, carros.length + motos.length, vans.length);
 
         while (opcao != 0) {
             exibirMenu();
@@ -59,10 +64,10 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Veiculos disponiveis: " + locadora.contarVeiculosDisponiveis(carros));
+                    System.out.println("Veiculos disponiveis: " + locadora.contarVeiculosDisponiveis(frota));
                     break;
                 case 2:
-                    System.out.println("Receita total da frota: R$" + locadora.calcularReceitaTotalFrota(carros));
+                    System.out.println("Receita total da frota: R$" + locadora.calcularReceitaTotalFrota(frota));
                     break;
                 case 3:
                     System.out.println("Calculando media de idade (nenhum cliente cadastrado ainda)...");
@@ -73,8 +78,8 @@ public class Main {
                     System.out.println("Cliente mais velho: " + maisVelho.getNome() + " (" + maisVelho.getIdade() + " anos)");
                     break;
                 case 5:
-                    System.out.println("Buscando carro de placa ZZZ0000...");
-                    System.out.println(locadora.buscarVeiculoPorPlaca(carros, "ZZZ0000"));
+                    System.out.println("Buscando veiculo de placa ZZZ0000...");
+                    System.out.println(locadora.buscarVeiculoPorPlaca(frota, "ZZZ0000"));
                     break;
                 case 6:
                     System.out.println("Multa para 3 dias de atraso: R$" + locadora.calcularMultaAtraso(3));
@@ -92,7 +97,7 @@ public class Main {
                     System.out.printf("Categoria %d por %d dias: R$ %.2f%n", categoria, dias, total);
                     break;
                 case 9:
-                    System.out.println(locadora.gerarResumoFrota(carros));
+                    System.out.println(locadora.gerarResumoFrota(frota));
                     break;
                 case 10:
                     System.out.println("Aplicando desconto escalonado em R$1000,00 por 10 dias...");
