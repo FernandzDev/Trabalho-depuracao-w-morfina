@@ -84,7 +84,12 @@ public class Main {
                     System.out.println("Valor total: R$" + locadora.processarLocacaoCompleta(carros[0], clientes[1], seguroCompleto, 10));
                     break;
                 case 8:
-                    System.out.println("Diaria da categoria 1 por 5 dias: R$" + locadora.calcularDiariaComCategoria(0, 5));
+                    int categoria = 1;
+                    int dias = 5;
+
+                    double total = locadora.calcularDiariaComCategoria(categoria, dias);
+
+                    System.out.printf("Categoria %d por %d dias: R$ %.2f%n", categoria, dias, total);
                     break;
                 case 9:
                     System.out.println(locadora.gerarResumoFrota(carros));
