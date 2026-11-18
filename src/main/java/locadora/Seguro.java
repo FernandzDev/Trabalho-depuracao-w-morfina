@@ -21,10 +21,18 @@ public class Seguro {
         this.valorDiario = valorDiario;
     }
 
+    /**
+     * Retorna o tipo de seguro.
+     * @return tipo de seguro
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * Retorna o valor do seguro por dia de locação.
+     * @return valor diário do seguro, em reais
+     */
     public double getValorDiario() {
         return valorDiario;
     }

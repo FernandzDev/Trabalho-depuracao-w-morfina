@@ -2,8 +2,14 @@ package locadora;
 
 import java.util.Scanner;
 
+/**
+ * Executa o menu da demonstração do sistema da locadora.
+ */
 public class Main {
-
+    /**
+     * Prepara os dados de exemplo e executa o menu da locadora.
+     * @param args argumentos da linha de comando, não utilizados
+     */
     public static void main(String[] args) {
         Carro[] carros = {
             new Carro("ABC1234", "Onix", 100.0),
@@ -121,6 +127,9 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Exibe no console as opções disponíveis no menu.
+     */
     private static void exibirMenu() {
         System.out.println("\n===== SISTEMA LOCADORA - TRABALHO ANALISE DE ALGORITMOS =====");
         System.out.println("1 - Contar veiculos disponiveis");
@@ -139,6 +148,12 @@ public class Main {
         System.out.print("Escolha uma opcao: ");
     }
 
+    /**
+     * Demonstra uma reserva, o registro de uma avaria e a confirmação simulada
+     * do pagamento
+     * @param cliente cliente usado na demonstração
+     * @param veiculo veículo usado na reserva e na vistoria.
+     */
     private static void demonstrarLocacao(Cliente cliente, Veiculo veiculo) {
         Reserva reserva = new Reserva (cliente, veiculo, 3);
         double subtotal = reserva.calcularSubtotal();

@@ -1,5 +1,8 @@
 package locadora;
 
+/**
+ * Representa uma van cuja diária pode variar conforme a capacidade de carga
+ */
 public class Van extends Veiculo {
 
     private final int capacidadeCarga;
@@ -15,10 +18,19 @@ public class Van extends Veiculo {
         super(placa, modelo, valorDiaria);
         this.capacidadeCarga = capacidadeCarga;
     }
+
+    /**
+     * Retorna a capacidade de carga da van
+     * @return capacidade de carga em quilogramas (kg)
+     */
     public int getCapacidadeCarga () {
         return capacidadeCarga;
     }
 
+    /**
+     * Calcula a diária da van com adicional de R$ 50,00 acima de 1.00 kg.
+     * @return diária final da van, em reais.
+     */
         @Override
         public double calcularValorDiaria () {
         double valorBase = getValorDiariaBase();
@@ -28,6 +40,10 @@ public class Van extends Veiculo {
         return valorBase;
     }
 
+    /**
+     * Monta uma descrição com o modelo e a capacidade de carga da van.
+     * @return descrição da van
+     */
     @Override
     public String getDescricao () {
         return "Van " + getModelo() + " ( Capacidade: " + capacidadeCarga + " kg)";

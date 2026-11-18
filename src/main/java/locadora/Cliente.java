@@ -23,14 +23,27 @@ public class Cliente {
         this.idade = idade;
         this.anosHabilitado = anosHabilitado;
     }
+
+    /**
+     * Retorna o nome do cliente
+     * @return nome do cliente
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Retorna a idade do cliente
+     * @return idade em anos
+     */
     public int getIdade() {
         return idade;
     }
 
+    /**
+     * Retorna o tempo de habilitação do cliente.
+     * @return quantidade de anos de habilitação
+     */
     public int getAnosHabilitado() {
         return anosHabilitado;
     }

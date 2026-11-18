@@ -20,10 +20,18 @@ public class Moto extends Veiculo {
       this.cilindrada = cilindrada;
   }
 
+    /**
+     * Retorna a cilindrada da moto
+     * @return cilindrada em centímetros cubicos (cc)
+     */
   public int getCilindrada(){
       return cilindrada;
   }
 
+    /**
+     * Calcula a diária da moto com adicional de R$ 30,00 acima de 300 cc.
+     * @return diária final da moto, em reais
+     */
     @Override
     public double calcularValorDiaria() {
       double valorBase = getValorDiariaBase();
@@ -35,6 +43,10 @@ public class Moto extends Veiculo {
       return valorBase;
     }
 
+    /**
+     * Monta uma descrição com o modelo e a cilindrada da moto
+     * @return descrição da moto
+     */
     @Override
     public String getDescricao() {
         return "Moto " + getModelo() + " (" + cilindrada + " cc)";
