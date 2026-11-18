@@ -197,17 +197,17 @@ public class Locadora {
      * Mostra a quantidade de carros disponiveis e calcula a média do valor diario
      * apenas de carros disponiveis
      *
-     * @param carros frota a ser resumida
+     * @param veiculos frota a ser resumida
      * @return texto no formato "N carro(s) disponivel(is), media de R$X/dia,
      * a média é 0 quando não há carros disponíveis
      */
-    public String gerarResumoFrota(Carro[] carros) {
+    public String gerarResumoFrota(Alugavel[] veiculos) {
         int disponiveis = 0;
         double somaValores = 0;
-        for (int i = 0; i < carros.length; i++) {
-            if (carros[i].isDisponivel()) {
+        for (int i = 0; i < veiculos.length; i++) {
+            if (veiculos[i].isDisponivel()) {
                 disponiveis++;
-                somaValores += carros[i].getValorDiaria();
+                somaValores += veiculos[i].calcularValorDiaria();
             }
         }
         double media = disponiveis == 0 ? 0 : somaValores / disponiveis;
