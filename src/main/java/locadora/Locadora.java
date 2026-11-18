@@ -207,7 +207,7 @@ public class Locadora {
             }
         }
         double media = disponiveis == 0 ? 0 : somaValores / disponiveis;
-        return disponiveis + " carro(s) disponivel(is), media de R$" + media + "/dia";
+        return disponiveis + " veiculos(s) disponivel(is), media de R$" + media + "/dia";
     }
 
     /**
