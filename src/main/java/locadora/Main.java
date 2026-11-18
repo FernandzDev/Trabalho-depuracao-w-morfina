@@ -107,6 +107,9 @@ public class Main {
                     System.out.println("Verificando fidelidade da cliente Ana (25 anos, 5 locacoes anteriores)...");
                     System.out.println("Elegivel? " + locadora.clienteElegivelDescontoFidelidade(clientes[3], 5));
                     break;
+                case 12:
+                    demonstrarLocacao(clientes[0], motos[2]);
+                    break;
                 case 0:
                     System.out.println("Encerrando o sistema...");
                     break;
@@ -120,19 +123,55 @@ public class Main {
 
     private static void exibirMenu() {
         System.out.println("\n===== SISTEMA LOCADORA - TRABALHO ANALISE DE ALGORITMOS =====");
-        System.out.println("1 - Contar carros disponiveis");
-        System.out.println("2 - Calcular receita total da frota");
+        System.out.println("1 - Contar veiculos disponiveis");
+        System.out.println("2 - Somar diárias da frota");
         System.out.println("3 - Calcular media de idade dos clientes");
         System.out.println("4 - Buscar cliente mais velho");
-        System.out.println("5 - Buscar carro por placa");
+        System.out.println("5 - Buscar veiculo por placa");
         System.out.println("6 - Calcular multa por atraso");
         System.out.println("7 - Processar locacao completa");
         System.out.println("8 - Calcular diaria por categoria");
         System.out.println("9 - Gerar resumo da frota");
         System.out.println("10 - Calcular desconto escalonado");
         System.out.println("11 - Verificar elegibilidade de fidelidade");
+        System.out.println("12 - Demonstrar reserva, vistoria e pagamento");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opcao: ");
+    }
+
+    private static void demonstrarLocacao(Cliente cliente, Veiculo veiculo) {
+        Reserva reserva = new Reserva (cliente, veiculo, 3);
+        double subtotal = reserva.calcularSubtotal();
+
+        System.out.println("Cliente: "+ cliente.getNome());
+        System.out.println("Veiculo: " + veiculo.getDescricao());
+        System.out.printf("Subtotal de 3 dias: R$ %.2f%n", subtotal);
+
+        Vistoria vistoria = new Vistoria(veiculo);
+        vistoria.registrarAvaria(("Retrovisor esquerdo riscado"));
+
+        System.out.print("Tem avaria? ");
+        if (vistoria.temAvaria()) {
+            System.out.println("Sim");
+        } else {
+            System.out.println("Não");
+        }
+        System.out.println("Observação: " + vistoria.getObservacao());
+
+        Pagamento pagamento = new Pagamento(reserva, subtotal);
+        System.out.print("Pago antes da confirmação? ");
+        if  (pagamento.isPago()) {
+            System.out.print("Sim\n");
+        } else {
+            System.out.print("Não\n");
+        }
+        pagamento.confirmarPagamento();
+        System.out.print("Pago depois da confirmacao? ");
+        if  (pagamento.isPago()) {
+            System.out.print("Sim\n");
+        } else {
+            System.out.print("Não\n");
+        }
     }
 }
 
