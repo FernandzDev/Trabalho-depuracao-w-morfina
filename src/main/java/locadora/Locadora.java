@@ -29,18 +29,14 @@ public class Locadora {
     }
 
     /**
-     * Soma o valor da diária de todos os carros da frota, estejam eles
+     * Soma o valor da diária de todos os veiculos da frota, estejam eles
      * disponíveis ou não.
      *
      * @param veiculos frota a ser somada (não deve ser null nem conter elementos null)
      * @return soma das diárias, em reais. 0 se a frota estiver vazia
      */
     public double calcularReceitaTotalFrota(Veiculo[] veiculos) {
-        double total = 0;
-        for (int i = 0; i < veiculos.length; i++) {
-            total += veiculos[i].getValorDiariaBase();
-        }
-        return total;
+        return somarDiarias(veiculos);
     }
 
     /**
@@ -80,8 +76,8 @@ public class Locadora {
     }
 
     /**
-     * Busca um carro pela placa e devolve uma descrição com o modelo e o valor
-     * da diária. Se houver mais de um carro com a mesma placa, vale o primeiro
+     * Busca um veiculo pela placa e devolve uma descrição com o modelo e o valor
+     * da diária. Se houver mais de um veiculo com a mesma placa, vale o primeiro
      *
      * @param veiculos frota onde a busca será feita (não deve ser null)
      * @param placa placa procurada
@@ -91,10 +87,10 @@ public class Locadora {
     public String buscarVeiculoPorPlaca(Veiculo[] veiculos, String placa) {
         for (int i = 0; i < veiculos.length; i++) {
             if (veiculos[i].getPlaca().equals(placa)) {
-                return veiculos[i].getModelo() + " - R$" + veiculos[i].getValorDiariaBase() + "/dia";
+                return veiculos[i].getModelo() + " - R$" + veiculos[i].calcularValorDiaria() + "/dia";
             }
         }
-        return "Carro de placa " + placa + " nao encontrado";
+        return "Veiculo de placa " + placa + " nao encontrado";
     }
 
     /**
@@ -167,7 +163,7 @@ public class Locadora {
      * @return valor final, seja com ou sem o desconto
      */
     private double aplicarDescontosEEncargos(double valorBruto, Cliente cliente, int dias) {
-        if (cliente.isApto() || dias >= 7) {
+        if (cliente.isApto() && dias >= 7) {
             return valorBruto * 0.85;
         }
         return valorBruto;
