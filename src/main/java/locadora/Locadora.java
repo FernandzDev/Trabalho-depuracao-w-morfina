@@ -15,31 +15,30 @@ public class Locadora {
     /**
      * Vetor utilizado para fazer a contagem de carros disponiveis.
      *
-     * @param carros frota a ser analisada
+     * @param veiculos frota a ser analisada
      * @return quantidade de carros disponiveis para alugar
      */
-    public int contarCarrosDisponiveis(Carro[] carros) {
+    public int contarVeiculosDisponiveis(Veiculo[] veiculos) {
         int total = 0;
-        for (int i = 0; i < carros.length; i++) {
-            if (carros[i].isDisponivel()) {
+        for (int i = 0; i < veiculos.length; i++) {
+            if (veiculos[i].isDisponivel()) {
                 total++;
             }
         }
         return total;
     }
 
-
     /**
      * Soma o valor da diária de todos os carros da frota, estejam eles
      * disponíveis ou não.
      *
-     * @param carros frota a ser somada (não deve ser null nem conter elementos null)
+     * @param veiculos frota a ser somada (não deve ser null nem conter elementos null)
      * @return soma das diárias, em reais. 0 se a frota estiver vazia
      */
-    public double calcularReceitaTotalFrota(Carro[] carros) {
+    public double calcularReceitaTotalFrota(Veiculo[] veiculos) {
         double total = 0;
-        for (int i = 0; i < carros.length; i++) {
-            total += carros[i].getValorDiaria();
+        for (int i = 0; i < veiculos.length; i++) {
+            total += veiculos[i].getValorDiariaBase();
         }
         return total;
     }
@@ -84,15 +83,15 @@ public class Locadora {
      * Busca um carro pela placa e devolve uma descrição com o modelo e o valor
      * da diária. Se houver mais de um carro com a mesma placa, vale o primeiro
      *
-     * @param carros frota onde a busca será feita (não deve ser null)
+     * @param veiculos frota onde a busca será feita (não deve ser null)
      * @param placa placa procurada
      * @return texto no formato "Modelo - R$valor/dia", ou uma mensagem
      * informando que o carro não foi encontrado
      */
-    public String buscarCarroPorPlaca(Carro[] carros, String placa) {
-        for (int i = 0; i < carros.length; i++) {
-            if (carros[i].getPlaca().equals(placa)) {
-                return carros[i].getModelo() + " - R$" + carros[i].getValorDiaria() + "/dia";
+    public String buscarVeiculoPorPlaca(Veiculo[] veiculos, String placa) {
+        for (int i = 0; i < veiculos.length; i++) {
+            if (veiculos[i].getPlaca().equals(placa)) {
+                return veiculos[i].getModelo() + " - R$" + veiculos[i].getValorDiariaBase() + "/dia";
             }
         }
         return "Carro de placa " + placa + " nao encontrado";
@@ -119,38 +118,42 @@ public class Locadora {
      * desconto quando o cliente estiver apto e o aluguel for de 7 dias
      * ou mais.
      *
-     * @param carro carro que sera alugado
+     * @param veiculo carro que sera alugado
      * @param cliente cliente que esta alugando
      * @param seguro seguro contratado
      * @param dias quantidade de dias de aluguel
      * @return valor final a pagar em reais
      */
-    public double processarLocacaoCompleta(Carro carro, Cliente cliente, Seguro seguro, int dias) {
-        validarLocacao(carro);
-        double valorBruto = calcularValorBruto(carro, seguro, dias);
+    public double processarLocacaoCompleta(Veiculo veiculo, Cliente cliente, Seguro seguro, int dias) {
+        validarLocacao(veiculo, dias);
+        double valorBruto = calcularValorBruto(veiculo, seguro, dias);
         return aplicarDescontosEEncargos(valorBruto, cliente, dias);
     }
 
     /**
      * Valida se a locação pode acontecer
-     * @param carro a ser alugado
+     * @param item veiculo a ser alugado
+     * @param dias quantidade de dias que foi alugado
      */
-    private void validarLocacao(Carro carro) {
-        if (!carro.isDisponivel()) {
-            throw new IllegalStateException("Carro indisponivel");
+    private void validarLocacao(Alugavel item, int dias) {
+        if (!item.isDisponivel()) {
+            throw new IllegalStateException("Veiculo indisponivel");
+        }
+        if (dias <= 0){
+            throw new IllegalStateException("A locação precisa ter pelo menos 1 dia");
         }
     }
 
     /**
      * Calcula o valor bruto da locação sem desconto.
      *
-     * @param carro carro alugado
+     * @param item veiculo alugado
      * @param seguro seguro contratado
      * @param dias quantidade de dias
      * @return (diária do carro + diária do seguro) * dias
      */
-    private double calcularValorBruto(Carro carro, Seguro seguro, int dias) {
-        return (carro.getValorDiaria() + seguro.getValorDiario()) * dias;
+    private double calcularValorBruto(Alugavel item, Seguro seguro, int dias) {
+        return (item.calcularValorDiaria() + seguro.getValorDiario()) * dias;
     }
 
     /**
