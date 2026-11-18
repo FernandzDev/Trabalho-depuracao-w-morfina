@@ -117,6 +117,8 @@ public class Locadora {
      * @param seguro seguro contratado
      * @param dias quantidade de dias de aluguel
      * @return valor final a pagar em reais
+     * @throws IllegalStateException se o veículo estiver indisponível ou se a
+     * quantidade de dias for menor que um
      */
     public double processarLocacaoCompleta(Veiculo veiculo, Cliente cliente, Seguro seguro, int dias) {
         validarLocacao(veiculo, dias);
@@ -146,7 +148,7 @@ public class Locadora {
      * @param item veiculo alugado
      * @param seguro seguro contratado
      * @param dias quantidade de dias
-     * @return (diária do carro + diária do seguro) * dias
+     * @return (diária do item alugável + diária do seguro) * dias
      */
     private double calcularValorBruto(Alugavel item, Seguro seguro, int dias) {
         return (item.calcularValorDiaria() + seguro.getValorDiario()) * dias;
@@ -194,8 +196,8 @@ public class Locadora {
      * final apenas dos disponíveis, fica em zero se não houver nenhum.
      *
      * @param veiculos frota a ser resumida
-     * @return texto no formato "N carro(s) disponivel(is), media de R$X/dia,
-     * a média é 0 quando não há carros disponíveis
+     * @return texto com a quantidade de veículos disponíveis e a média de suas
+     * diárias; a média é 0 quando não há veículos disponíveis
      */
     public String gerarResumoFrota(Alugavel[] veiculos) {
         int disponiveis = 0;

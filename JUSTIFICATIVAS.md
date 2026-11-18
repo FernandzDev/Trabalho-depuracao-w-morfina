@@ -63,7 +63,7 @@ e, para `diasAtraso <= 0`, devolvo 0 (sem multa e sem valor negativo).
 **Explicação:** A regra diz que o desconto de 15% só vale quando o cliente é apto E o aluguel é de 7 dias ou mais,
 mas o método `aplicarDescontosEEncargos` usava `||`. Assim, qualquer cliente apto ganhava desconto mesmo em
 1 dia, e qualquer cliente (até não apto) ganhava desconto com 7 dias ou mais. Troquei `||` por `&&`. Também
-acrescentei, em `validarLocacao`, uma verificação de `dias <= 0` (lançando `IllegalArgumentException`), para
+acrescentei, em `validarLocacao`, uma verificação de `dias <= 0` (lançando `IllegalStateException`), para
 não calcular valores negativos ou zerados; as demais etapas (`calcularValorBruto`) já estavam corretas
 
 ## 8. calcularDiariaComCategoria
@@ -80,8 +80,9 @@ categoria 1 por 5 dias = R$650,00) o calculo continua o mesmo.
 
 **Tinha bug?** Não
 
-**Explicação:** O método estava 100% correto,  só fiz uma adaptação adicionando a super classe `Veiculos` para funcionar
-com qualquer veiculo e não somente com a classe `carros`.
+**Explicação:** A lógica do método já estava correta. A assinatura foi adaptada para receber um vetor do tipo
+`Alugavel[]`, permitindo resumir uma frota com diferentes tipos de veículos, como `Carro`, `Moto` e `Van`, sem depender
+de uma classe concreta.
 
 ## 10. calcularDescontoEscalonado
 
@@ -102,5 +103,19 @@ exatamente 25. Troquei por `>= 25`. A outra condição, `totalLocacoesAnteriores
 
 # Justificativas - Parte 2
 
-Veiculo: Criei a classe mãe veiculo, assim consigo fazer as outras classes herdarem os parametros dela
-e otimizar parte do sistema.
+Escolhemos criar `Alugavel` como interface porque ela define somente o comportamento que todo item alugável deve
+oferecer: calcular a diária, informar sua disponibilidade e fornecer uma descrição. Assim, os métodos da locadora podem
+trabalhar com tipos diferentes por meio do mesmo contrato, sem precisar conhecer a classe concreta de cada item.
+
+Também criamos a classe abstrata `Veiculo`, que implementa `Alugavel` e concentra os dados e comportamentos comuns da
+frota, como placa, modelo, valor da diária-base e disponibilidade. `Carro`, `Moto` e `Van` herdam dessa classe. `Moto`
+usa a cilindrada e `Van` usa a capacidade de carga para acrescentar valores específicos ao cálculo da diária.
+
+O método `somarDiarias(Alugavel[] itens)` demonstra o polimorfismo exigido na extensão: ele percorre um vetor que pode
+misturar carros, motos e vans e soma o resultado de `calcularValorDiaria()` de cada item sem testar seu tipo concreto.
+O método `gerarResumoFrota(Alugavel[] veiculos)` usa a mesma abstração para calcular a quantidade de itens disponíveis
+e a média das diárias.
+
+Além das classes relacionadas à frota, foram criadas `Reserva`, `Pagamento` e `Vistoria`. `Reserva` associa um cliente a
+um item `Alugavel` por uma quantidade válida de dias e calcula o subtotal; `Pagamento` registra o valor cobrado e se ele
+foi quitado; e `Vistoria` registra a existência e a descrição de uma avaria no veículo.
