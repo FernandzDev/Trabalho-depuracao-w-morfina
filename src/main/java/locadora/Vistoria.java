@@ -26,6 +26,11 @@ public class Vistoria {
         return observacao;
     }
 
+    /**
+     * Consulta se uma avaria foi registrada nesta vistoria.
+     * @return {@code true} se há avaria registrada ou
+     * {@code false} se nenhuma avaria foi registrada
+     */
     public boolean temAvaria() {
         return temAvaria;
     }

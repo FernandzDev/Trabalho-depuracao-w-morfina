@@ -13,10 +13,10 @@ public class Locadora {
     private static final double[] DESCONTOS = {0.05, 0.10, 0.20};
 
     /**
-     * Vetor utilizado para fazer a contagem de carros disponiveis.
+     * Conta os veículos disponíveis para locação
      *
      * @param veiculos frota a ser analisada
-     * @return quantidade de veiculos disponiveis para alugar
+     * @return quantidade de veiculos disponiveis
      */
     public int contarVeiculosDisponiveis(Veiculo[] veiculos) {
         int total = 0;
@@ -108,10 +108,9 @@ public class Locadora {
     }
 
     /**
-     * Processa uma locação completa validando o carro e a quantidade de dias,
-     * calcula o valor bruto ((diária + seguro) * dias) e aplica 15% de
-     * desconto quando o cliente estiver apto e o aluguel for de 7 dias
-     * ou mais.Em caso de item indisponível ou quantidade de dias menor que 1 aparece a mensagem IllegalStateException
+     * Calcula o valor de uma locação usando a diária final do
+     * veículo e a diária do seguro. Aplica 15% de desconto quando
+     * o cliente está apto e o periodo é de pelo menos sete dias.
      *
      * @param veiculo veiculo que sera alugado
      * @param cliente cliente que esta alugando
@@ -126,9 +125,11 @@ public class Locadora {
     }
 
     /**
-     * Valida se a locação pode acontecer
+     * Verifica se o item está disponível e se a locação dura pelo menos um dia.
      * @param item veiculo a ser alugado
      * @param dias quantidade de dias que foi alugado
+     * @throws IllegalStateException se o item estiver indisponível ou se a quantidade
+     * de dias for menor que um
      */
     private void validarLocacao(Alugavel item, int dias) {
         if (!item.isDisponivel()) {

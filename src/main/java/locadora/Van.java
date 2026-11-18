@@ -28,7 +28,8 @@ public class Van extends Veiculo {
     }
 
     /**
-     * Calcula a diária da van com adicional de R$ 50,00 acima de 1.00 kg.
+     * Calcula a diária da van com adicional de R$ 50,00
+     * quando a capacidade de carga é maior que 1.000 kg.
      * @return diária final da van, em reais.
      */
         @Override
